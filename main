@@ -1,37 +1,61 @@
 char input;
+bool l13,l12,l11;
 void setup() {
   // put your setup code here, to run once:
   pinMode(13, OUTPUT);
   pinMode(12, OUTPUT);
   pinMode(11, OUTPUT);
+  pinMode(10, INPUT);
+  pinMode(9, INPUT);
+  pinMode(8, INPUT);
   Serial.begin(9600);
   Serial.print("Connect success");
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if (Serial.available()) {
-    Serial.print("Connect successdddd");
+  if (Serial.available()) {   
     input = Serial.read();
     switch (input) {
       case '0':
-        digitalWrite(13, HIGH);
+        l13 = HIGH;
         break;
       case '1':
-        digitalWrite(13, LOW);
+        l13 = LOW;
         break;
       case '2':
-        digitalWrite(12, HIGH);
+        l12 = HIGH;
         break;
       case '3':
-        digitalWrite(12, LOW);
+        l12 = LOW;
         break;
       case '4':
-        digitalWrite(11, HIGH);
+        l11 = HIGH;
         break;
       case '5':
-        digitalWrite(11, LOW);
+        l11 = LOW;
         break;
     }
   }
+
+  bool in1 = digitalRead(10);
+  bool in2 = digitalRead(9);
+  bool in3 = digitalRead(8);
+
+  if(in1){
+    l13 = !l13;
+    delay(1000);
+    }
+  if(in2){
+    l12 = !l12;
+    delay(1000);
+   }
+  if(in3){
+    l11 = !l11;
+    delay(1000);
+   }
+  
+  digitalWrite(13, l13);
+  digitalWrite(12, l12);
+  digitalWrite(11, l11);
 }
