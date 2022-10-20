@@ -1,5 +1,6 @@
 char input;
 bool l13,l12,l11;
+unsigned long long int timer;
 void setup() {
   // put your setup code here, to run once:
   pinMode(13, OUTPUT);
@@ -13,6 +14,13 @@ void setup() {
 }
 
 void loop() {
+  timer = millis();
+  if(timer % 3000 ==0){
+    delay(200);
+    Serial.print("\nLED1:");Serial.println(l13);
+    Serial.print("LED2:");Serial.println(l12);
+    Serial.print("LED3:");Serial.println(l11);
+    }
   // put your main code here, to run repeatedly:
   if (Serial.available()) {   
     input = Serial.read();
@@ -34,6 +42,9 @@ void loop() {
         break;
       case '5':
         l11 = LOW;
+        break;
+      case 's':
+        
         break;
     }
   }
